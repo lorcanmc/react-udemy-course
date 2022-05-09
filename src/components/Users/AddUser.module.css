@@ -1,0 +1,26 @@
+.input {
+    margin: 2rem auto;
+    padding: 1rem;
+    width: 90%;
+    max-width: 40rem;
+}
+
+.input label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.input input {
+    display: block;
+    width: 90%;
+    margin-bottom: 0.5rem;
+    padding: 0.2rem;
+    font: inherit;
+    border: 1px solid #d1c1ab;
+    border-radius: 3px;
+}
+
+/* .modal h2 {
+    background: purple;
+} */
