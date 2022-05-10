@@ -1,25 +1,44 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import css from "./Modal.module.css";
 import Card from "./Card";
 import Button from "./Button";
 
 export default function Modal(props) {
-  const { title, message, onConfirm } = props;
+  const Backdrop = (props) => {
+    return <div className={css.backdrop} onClick={props.onConfirm} />;
+  };
+
+  const ModalOverlay = (props) => {
+    return (
+      <Card className={css.modal}>
+        <header>
+          <h2 className={css.title}>{props.title}</h2>
+        </header>
+        <div>
+          <p>{props.message}</p>
+        </div>
+        <footer>
+          <Button onClick={props.onConfirm}>OK</Button>
+        </footer>
+      </Card>
+    );
+  };
 
   return (
     <>
-      <div className={css.backdrop} onClick={onConfirm} />
-      <Card className={css.modal}>
-        <header>
-          <h2 className={css.title}>{title}</h2>
-        </header>
-        <div>
-          <p>{message}</p>
-        </div>
-        <footer>
-          <Button onClick={onConfirm}>OK</Button>
-        </footer>
-      </Card>
+      {ReactDOM.createPortal(
+        <Backdrop onConfirm={props.onConfirm} />,
+        document.getElementById("backdrop-root")
+      )}
+      {ReactDOM.createPortal(
+        <ModalOverlay
+          title={props.title}
+          message={props.message}
+          onConfirm={props.onConfirm}
+        />,
+        document.getElementById("overlay-root")
+      )}
     </>
   );
 }
